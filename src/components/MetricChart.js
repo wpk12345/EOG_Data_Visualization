@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, FormControl, Select, MenuItem, Paper } from '@material-ui/core';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql, HttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -20,21 +20,6 @@ const useStyles = makeStyles(() => ({
 
 export default () => {
   const classes = useStyles();
-
-  const client = new ApolloClient({
-    uri: 'https://react.eogresources.com/graphql',
-    cache: new InMemoryCache(),
-  });
-
-  client
-    .query({
-      query: gql`
-        query GetTimestamp {
-          heartBeat
-        }
-      `,
-    })
-    .then((result) => console.log(result));
 
   const [state, setState] = React.useState({
     metric: '',

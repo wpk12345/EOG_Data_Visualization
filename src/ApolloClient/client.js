@@ -12,12 +12,3 @@ import {
     cache: new InMemoryCache(),
   });
   
-  client
-    .query({
-      query: gql`
-        query GetTimestamp {
-          heartBeat
-        }
-      `,
-    })
-    .then((result) => console.log(result));
