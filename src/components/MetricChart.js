@@ -3,7 +3,14 @@ import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, FormControl, Select, MenuItem, Paper } from '@material-ui/core';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
-
+import {
+    TIMESTAMP,
+    GET_WEATHER_FOR_LOCATION,
+    GET_METRICS,
+    GET_LAST_KNOWN_MEASUREMENT,
+    GET_MEASURMENTS,
+    GET_MULTIPLE_MEASUREMENTS,
+} from '../graphql/queries';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const useStyles = makeStyles(() => ({
@@ -32,6 +39,12 @@ export default () => {
     });
   };
 
+  const timeStamp = useQuery(TIMESTAMP);
+  const metrics = useQuery(GET_METRICS);
+
+    console.log(timeStamp.data);
+    console.log(metrics.data);
+    
   const data = [{ name: 'Date Stamp', uv: 1800, pv: 2400, amt: 2400 }];
 
   return (

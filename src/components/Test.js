@@ -1,19 +1,21 @@
 /* eslint-disable */
 import { gql, useQuery } from '@apollo/client';
-import { TIMESTAMP } from '../graphql/queries';
+import {
+    TIMESTAMP,
+    GET_METRICS,
+} from '../graphql/queries';
 
-console.log(TIMESTAMP);
+const Test = () => {
+    // const timeStamp = useQuery(TIMESTAMP);
+    // const metrics = useQuery(GET_METRICS);
 
-function Test() {
-    const { loading, error, data } = useQuery(TIMESTAMP);
-    console.log(data);
+    // console.log(timeStamp.data);
+    // console.log(metrics.data);
 
-    if(loading) return <p>Loading....</p>;
-    if(error) return <p>Error</p>;
-    
     return (
         <div>
-            <p>Test</p>
+            {/* <h3>Time Stamp: {timeStamp.data.heartBeat}</h3>
+            <h3>Metrics: {metrics.data.getMetrics[0]} </h3> */}
         </div>
     );
 
