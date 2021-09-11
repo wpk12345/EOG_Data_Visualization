@@ -2,37 +2,42 @@
 import { gql } from '@apollo/client';
 
 export const TIMESTAMP = gql`
-{
- heartBeat
-}
+  {
+    heartBeat
+  }
 `;
 
 export const GET_WEATHER_FOR_LOCATION = gql`
-{
- heartBeat
-}
+  {
+    heartBeat
+  }
 `;
 
 export const GET_METRICS = gql`
-{
- getMetrics
-}
+  {
+    getMetrics
+  }
 `;
 
 export const GET_LAST_KNOWN_MEASUREMENT = gql`
-{
- heartBeat
-}
+  {
+    getLastKnownMeasurement(metricName: "oilTemp") {
+      metric
+      at
+      value
+      unit
+    }
+  }
 `;
 
 export const GET_MEASURMENTS = gql`
-{
- heartBeat
-}
+  {
+    heartBeat
+  }
 `;
 
 export const GET_MULTIPLE_MEASUREMENTS = gql`
-{
- heartBeat
-}
+  {
+    heartBeat
+  }
 `;

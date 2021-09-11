@@ -1,10 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import { client } from "./ApolloClient/client";
-import {
-  ApolloProvider,
-  gql,
-} from '@apollo/client';
+import { client } from './ApolloClient/client';
+import { ApolloProvider, gql } from '@apollo/client';
 import { ToastContainer } from 'react-toastify';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import MetricChart from './components/MetricChart';
 import Wrapper from './components/Wrapper';
-import Test from './components/Test';
+// import Test from './components/Test';
 
 const theme = createTheme({
   palette: {
@@ -34,7 +31,7 @@ const App = () => (
       <CssBaseline />
       <Wrapper>
         <Header />
-        <Test />
+        {/* <Test /> */}
         <MetricChart />
         <ToastContainer />
       </Wrapper>
