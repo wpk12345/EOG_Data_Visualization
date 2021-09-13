@@ -30,18 +30,26 @@ export default () => {
 
   const [state, setState] = React.useState({
     metric: '',
+    xAxisName: '',
+    yAxisName: '',
   });
 
   const handleChange = (event) => {
     const { value } = event.target;
     setState({
       metric: value,
+      xAxisName: value,
     });
   };
 
+  //variables for queries
+  const metricName = state.metric;
+
   const getTimeStamp = useQuery(TIMESTAMP);
   const getMetrics = useQuery(GET_METRICS);
-  const getLastKnownMeasurement = useQuery(GET_LAST_KNOWN_MEASUREMENT);
+  const getLastKnownMeasurement = useQuery(GET_LAST_KNOWN_MEASUREMENT, {
+    variables: { metricName },
+  });
 
   //get all queries first
   console.log(getTimeStamp.data);
@@ -49,16 +57,14 @@ export default () => {
   console.log(getLastKnownMeasurement.data);
   console.log(state.metric);
 
-  //switch statement for metric selected
-
-  const data = [{ name: 'Date Stamp', uv: 1800, pv: 2400, amt: 1200 }];
+  const data = [{ name: 'test', uv: 1800, pv: 2400, amt: 1200 }];
 
   return (
     <div>
-      <h1>
+      {/* <h1>
         Hello {getTimeStamp.data.heartBeat} {getMetrics.data.getMetrics[0]}{' '}
         {getLastKnownMeasurement.data.getLastKnownMeasurement.value}
-      </h1>
+      </h1> */}
       <Paper className={classes.paper}>
         <FormControl className={classes.formControl}>
           <InputLabel>Select Metric</InputLabel>

@@ -20,8 +20,8 @@ export const GET_METRICS = gql`
 `;
 
 export const GET_LAST_KNOWN_MEASUREMENT = gql`
-  {
-    getLastKnownMeasurement(metricName: "oilTemp") {
+  query GetData($metricName: String!) {
+    getLastKnownMeasurement(metricName: $metricName) {
       metric
       at
       value
@@ -31,13 +31,23 @@ export const GET_LAST_KNOWN_MEASUREMENT = gql`
 `;
 
 export const GET_MEASURMENTS = gql`
-  {
-    heartBeat
+  query GetMoreData($measurements: MeasurementQuery) {
+    getMeasurements(input: $measurements) {
+      metric
+      at
+      value
+      unit
+    }
   }
 `;
 
 export const GET_MULTIPLE_MEASUREMENTS = gql`
-  {
-    heartBeat
+  query GetMoreData($measurementQuery: [MeasurementQuery]) {
+    getMultipleMeasurements(input: $measurementQuery) {
+      metric
+      at
+      value
+      unit
+    }
   }
 `;

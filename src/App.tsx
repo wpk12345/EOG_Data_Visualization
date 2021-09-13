@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import MetricChart from './components/MetricChart';
 import Wrapper from './components/Wrapper';
-// import Test from './components/Test';
 
 const theme = createTheme({
   palette: {
@@ -31,7 +30,6 @@ const App = () => (
       <CssBaseline />
       <Wrapper>
         <Header />
-        {/* <Test /> */}
         <MetricChart />
         <ToastContainer />
       </Wrapper>
