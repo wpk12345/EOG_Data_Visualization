@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputLabel, FormControl, Select, MenuItem, Paper } from '@material-ui/core';
 import { ApolloClient, InMemoryCache, ApolloProvider, gql, useQuery } from '@apollo/client';
@@ -28,22 +28,19 @@ const useStyles = makeStyles(() => ({
 export default () => {
   const classes = useStyles();
 
-  const [state, setState] = React.useState({
-    metric: '',
-    xAxisName: '',
-    yAxisName: '',
-  });
+  const [metric, setMetric] = useState('oilTemp');
+  const [amt, SetAmt] = useState(400);
+  const [xName, setXName] = useState(['', 500, 1000]);
+  const [yName, setYName] = useState(2500);
 
   const handleChange = (event) => {
     const { value } = event.target;
-    setState({
-      metric: value,
-      xAxisName: value,
-    });
+    setMetric(value);
+    setXName(getLastKnownMeasurement.data.getLastKnownMeasurement.value);
   };
 
   //variables for queries
-  const metricName = state.metric;
+  const metricName = metric;
 
   const getTimeStamp = useQuery(TIMESTAMP);
   const getMetrics = useQuery(GET_METRICS);
@@ -55,20 +52,20 @@ export default () => {
   console.log(getTimeStamp.data);
   console.log(getMetrics.data);
   console.log(getLastKnownMeasurement.data);
-  console.log(state.metric);
+  console.log(metric);
 
-  const data = [{ name: 'test', uv: 1800, pv: 2400, amt: 1200 }];
+  const data = [{ name: metric, xAxisName: xName, yAxisName: yName, amt: amt }];
 
   return (
     <div>
       {/* <h1>
-        Hello {getTimeStamp.data.heartBeat} {getMetrics.data.getMetrics[0]}{' '}
+        metric {getTimeStamp.data.heartBeat} {getMetrics.data.getMetrics[0]}{' '}
         {getLastKnownMeasurement.data.getLastKnownMeasurement.value}
       </h1> */}
       <Paper className={classes.paper}>
         <FormControl className={classes.formControl}>
           <InputLabel>Select Metric</InputLabel>
-          <Select value={state.metric} id="metricSelector" name="metric" onChange={handleChange}>
+          <Select value={metric} id="metricSelector" name="metric" onChange={handleChange}>
             <MenuItem value="casingPressure">Casing Pressure</MenuItem>
             <MenuItem value="injValveOpen">Inj Valve Open</MenuItem>
             <MenuItem value="tubingPressure">Tubing Pressure</MenuItem>
@@ -79,10 +76,10 @@ export default () => {
         </FormControl>
         <ResponsiveContainer height={300}>
           <LineChart width={600} height={300} data={data}>
-            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+            <Line type="monotone" dataKey="xAxisName" stroke="#8884d8" />
             <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="name" />
-            <YAxis dataKey="pv" />
+            <XAxis dataKey="xAxisName" />
+            <YAxis dataKey="yAxisName" />
           </LineChart>
         </ResponsiveContainer>
       </Paper>
